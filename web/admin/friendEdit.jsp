@@ -28,7 +28,8 @@
             <li><a href="${pageContext.request.contextPath}/admin/friend" class="active"><i class="bi bi-link-45deg"></i> 友链管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/oidc/setting"><i class="bi bi-shield-lock"></i> OIDC 设置</a></li>
         </ul>
-        <div class="sidebar-footer"><a href="${pageContext.request.contextPath}/admin/logout"><i class="bi bi-box-arrow-left"></i> 退出</a></div>
+        <div class="sidebar-footer"><a href="${pageContext.request.contextPath}/admin/settings"><i class="bi bi-gear"></i> 个人设置</a>
+            <a href="${pageContext.request.contextPath}/admin/logout"><i class="bi bi-box-arrow-left"></i> 退出</a></div>
     </nav>
     <main class="admin-content">
         <div class="content-header">

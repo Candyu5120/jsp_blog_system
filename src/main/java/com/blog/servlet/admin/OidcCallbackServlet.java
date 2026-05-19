@@ -32,28 +32,34 @@ public class OidcCallbackServlet extends HttpServlet {
         String state = req.getParameter("state");
         String error = req.getParameter("error");
 
+        // Determine error redirect based on binding mode
+        Boolean isBinding = (Boolean) req.getSession().getAttribute("oidc_binding");
+        String errorRedirect = Boolean.TRUE.equals(isBinding)
+                ? req.getContextPath() + "/admin/settings?error="
+                : req.getContextPath() + "/admin/login?error=";
+
         if (error != null) {
-            resp.sendRedirect(req.getContextPath() + "/admin/login?error=" + URLEncoder.encode(error, StandardCharsets.UTF_8));
+            resp.sendRedirect(errorRedirect + URLEncoder.encode(error, StandardCharsets.UTF_8));
             return;
         }
 
         // Verify state
         String savedState = (String) req.getSession().getAttribute("oidc_state");
         if (savedState == null || !savedState.equals(state)) {
-            resp.sendRedirect(req.getContextPath() + "/admin/login?error=Invalid state parameter");
+            resp.sendRedirect(errorRedirect + URLEncoder.encode("Invalid state parameter", StandardCharsets.UTF_8));
             return;
         }
         req.getSession().removeAttribute("oidc_state");
 
         if (StringUtil.isEmpty(code)) {
-            resp.sendRedirect(req.getContextPath() + "/admin/login?error=No authorization code");
+            resp.sendRedirect(errorRedirect + URLEncoder.encode("No authorization code", StandardCharsets.UTF_8));
             return;
         }
 
         try {
             OidcSetting setting = oidcSettingDao.findEnabled();
             if (setting == null) {
-                resp.sendRedirect(req.getContextPath() + "/admin/login?error=OIDC not configured");
+                resp.sendRedirect(errorRedirect + URLEncoder.encode("OIDC 未配置", StandardCharsets.UTF_8));
                 return;
             }
 
@@ -80,7 +86,7 @@ public class OidcCallbackServlet extends HttpServlet {
             HttpResponse<String> tokenResponse = httpClient.send(tokenRequest, HttpResponse.BodyHandlers.ofString());
 
             if (tokenResponse.statusCode() != 200) {
-                resp.sendRedirect(req.getContextPath() + "/admin/login?error=Token exchange failed: " + tokenResponse.statusCode());
+                resp.sendRedirect(errorRedirect + URLEncoder.encode("Token exchange failed: " + tokenResponse.statusCode(), StandardCharsets.UTF_8));
                 return;
             }
 
@@ -89,7 +95,7 @@ public class OidcCallbackServlet extends HttpServlet {
             String idToken = extractJsonValue(responseBody, "id_token");
 
             if (StringUtil.isEmpty(idToken)) {
-                resp.sendRedirect(req.getContextPath() + "/admin/login?error=No id_token in response");
+                resp.sendRedirect(errorRedirect + URLEncoder.encode("No id_token in response", StandardCharsets.UTF_8));
                 return;
             }
 
@@ -100,21 +106,46 @@ public class OidcCallbackServlet extends HttpServlet {
             String name = jwt.getClaim("name").asString();
             String preferredUsername = jwt.getClaim("preferred_username").asString();
 
-            // Find or create user
-            String username = preferredUsername != null ? preferredUsername : (email != null ? email : subject);
-            User user = userDao.findByUsername(username);
+            // Check if this is an OIDC binding request
+            Boolean binding = (Boolean) req.getSession().getAttribute("oidc_binding");
+            if (Boolean.TRUE.equals(binding)) {
+                req.getSession().removeAttribute("oidc_binding");
+                User loginUser = (User) req.getSession().getAttribute("loginUser");
+                if (loginUser != null) {
+                    // Bind OIDC subject to current user
+                    userDao.updateOidcSubject(loginUser.getId(), subject);
+                    loginUser.setOidcSubject(subject);
+                    req.getSession().setAttribute("loginUser", loginUser);
+                    resp.sendRedirect(req.getContextPath() + "/admin/settings?success=oidcBound");
+                    return;
+                }
+                // If not logged in, fall through to normal login
+            }
+
+            // Normal login flow: find by OIDC subject first, then by username
+            User user = userDao.findByOidcSubject(subject);
 
             if (user == null) {
-                // Auto-create user from OIDC identity
-                user = new User();
-                user.setUsername(username);
-                user.setPassword(StringUtil.sha256(UUID.randomUUID().toString())); // Random unusable password
-                user.setNickname(name != null ? name : username);
-                user.setEmail(email);
-                user.setBio("OIDC user");
-                user.setRole("editor");
-                int userId = userDao.insert(user);
-                user.setId(userId);
+                String username = preferredUsername != null ? preferredUsername : (email != null ? email : subject);
+                user = userDao.findByUsername(username);
+
+                if (user == null) {
+                    // Auto-create user from OIDC identity
+                    user = new User();
+                    user.setUsername(username);
+                    user.setPassword(StringUtil.sha256(UUID.randomUUID().toString())); // Random unusable password
+                    user.setNickname(name != null ? name : username);
+                    user.setEmail(email);
+                    user.setBio("OIDC user");
+                    user.setOidcSubject(subject);
+                    user.setRole("editor");
+                    int userId = userDao.insert(user);
+                    user.setId(userId);
+                } else {
+                    // Existing user found by username, link OIDC subject
+                    userDao.updateOidcSubject(user.getId(), subject);
+                    user.setOidcSubject(subject);
+                }
             }
 
             // Set session
@@ -122,7 +153,7 @@ public class OidcCallbackServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/admin/index.jsp");
 
         } catch (Exception e) {
-            resp.sendRedirect(req.getContextPath() + "/admin/login?error=" + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
+            resp.sendRedirect(errorRedirect + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
         }
     }
 

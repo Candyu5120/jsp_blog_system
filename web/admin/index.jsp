@@ -40,6 +40,7 @@
             </c:if>
         </ul>
         <div class="sidebar-footer">
+            <a href="${pageContext.request.contextPath}/admin/settings"><i class="bi bi-gear"></i> 个人设置</a>
             <a href="${pageContext.request.contextPath}/admin/logout"><i class="bi bi-box-arrow-left"></i> 退出登录</a>
             <a href="${pageContext.request.contextPath}/index" target="_blank"><i class="bi bi-eye"></i> 查看博客</a>
         </div>

@@ -10,6 +10,7 @@ public class User {
     private String avatar;
     private String email;
     private String bio;
+    private String oidcSubject;
     private String role;
     private Date createdAt;
 
@@ -29,6 +30,8 @@ public class User {
     public void setEmail(String email) { this.email = email; }
     public String getBio() { return bio; }
     public void setBio(String bio) { this.bio = bio; }
+    public String getOidcSubject() { return oidcSubject; }
+    public void setOidcSubject(String oidcSubject) { this.oidcSubject = oidcSubject; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
     public Date getCreatedAt() { return createdAt; }

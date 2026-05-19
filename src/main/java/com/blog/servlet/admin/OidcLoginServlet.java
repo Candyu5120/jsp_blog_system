@@ -17,10 +17,16 @@ public class OidcLoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        boolean isBinding = "true".equals(req.getParameter("binding"));
+        boolean isLoggedIn = req.getSession(false) != null && req.getSession().getAttribute("loginUser") != null;
+        String errorRedirect = (isBinding && isLoggedIn)
+                ? req.getContextPath() + "/admin/settings?error="
+                : req.getContextPath() + "/admin/login?error=";
+
         try {
             OidcSetting setting = oidcSettingDao.findEnabled();
             if (setting == null) {
-                resp.sendRedirect(req.getContextPath() + "/admin/login?error=OIDC not configured");
+                resp.sendRedirect(errorRedirect + URLEncoder.encode("OIDC 未配置", StandardCharsets.UTF_8));
                 return;
             }
 
@@ -28,13 +34,14 @@ public class OidcLoginServlet extends HttpServlet {
             String state = UUID.randomUUID().toString();
             req.getSession().setAttribute("oidc_state", state);
 
+            if (isBinding) {
+                req.getSession().setAttribute("oidc_binding", true);
+            }
+
             // Construct authorization URL
             String issuerUrl = setting.getIssuerUrl().replaceAll("/$", "");
             String authEndpoint = issuerUrl + "/protocol/openid-connect/auth";
-            // Try standard .well-known discovery endpoint format
             if (!issuerUrl.contains("/protocol/")) {
-                authEndpoint = issuerUrl + "/.well-known/openid-configuration";
-                // For simplicity, use the direct authorization endpoint
                 authEndpoint = issuerUrl + "/authorize";
             }
 
@@ -51,7 +58,7 @@ public class OidcLoginServlet extends HttpServlet {
 
             resp.sendRedirect(authUrl);
         } catch (Exception e) {
-            resp.sendRedirect(req.getContextPath() + "/admin/login?error=" + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
+            resp.sendRedirect(errorRedirect + URLEncoder.encode(e.getMessage(), StandardCharsets.UTF_8));
         }
     }
 }

@@ -17,6 +17,7 @@ public class UserDao extends BaseDao {
         u.setAvatar(rs.getString("avatar"));
         u.setEmail(rs.getString("email"));
         u.setBio(rs.getString("bio"));
+        u.setOidcSubject(rs.getString("oidc_subject"));
         u.setRole(rs.getString("role"));
         u.setCreatedAt(rs.getTimestamp("created_at"));
         return u;
@@ -71,6 +72,21 @@ public class UserDao extends BaseDao {
     public boolean updateRole(int id, String role) throws SQLException {
         String sql = "UPDATE t_user SET role=? WHERE id=?";
         return executeUpdate(sql, role, id) > 0;
+    }
+
+    public boolean updateProfile(User user) throws SQLException {
+        String sql = "UPDATE t_user SET nickname=?, email=?, bio=? WHERE id=?";
+        return executeUpdate(sql, user.getNickname(), user.getEmail(), user.getBio(), user.getId()) > 0;
+    }
+
+    public boolean updateOidcSubject(int id, String oidcSubject) throws SQLException {
+        String sql = "UPDATE t_user SET oidc_subject=? WHERE id=?";
+        return executeUpdate(sql, oidcSubject, id) > 0;
+    }
+
+    public User findByOidcSubject(String oidcSubject) throws SQLException {
+        String sql = "SELECT * FROM t_user WHERE oidc_subject = ?";
+        return executeQueryOne(sql, this::mapRow, oidcSubject);
     }
 
     public boolean delete(int id) throws SQLException {

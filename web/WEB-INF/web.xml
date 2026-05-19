@@ -211,6 +211,15 @@
         <url-pattern>/admin/chat</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SettingsServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.SettingsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SettingsServlet</servlet-name>
+        <url-pattern>/admin/settings</url-pattern>
+    </servlet-mapping>
+
     <!-- ==================== MIME Types ==================== -->
     <mime-mapping>
         <extension>css</extension>
