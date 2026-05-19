@@ -29,8 +29,15 @@
             <li><a href="${pageContext.request.contextPath}/admin/comment"><i class="bi bi-chat"></i> 评论管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/message"><i class="bi bi-envelope"></i> 留言管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/photo"><i class="bi bi-images"></i> 相册管理</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/friend"><i class="bi bi-link-45deg"></i> 友链管理</a></li>
+            <li class="nav-divider"></li>
+            <li><a href="${pageContext.request.contextPath}/admin/friend"><i class="bi bi-people"></i> 好友管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/chat"><i class="bi bi-chat-dots"></i> 私信管理</a></li>
+            <c:if test="${sessionScope.loginUser.role == 'admin'}">
+            <li class="nav-divider"></li>
+            <li><a href="${pageContext.request.contextPath}/admin/friendLink"><i class="bi bi-link-45deg"></i> 友链管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/user"><i class="bi bi-people-fill"></i> 用户管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/oidc/setting"><i class="bi bi-shield-lock"></i> OIDC 设置</a></li>
+            </c:if>
         </ul>
         <div class="sidebar-footer">
             <a href="${pageContext.request.contextPath}/admin/logout"><i class="bi bi-box-arrow-left"></i> 退出登录</a>
@@ -79,6 +86,30 @@
                     </div>
                 </a>
             </div>
+            <c:if test="${sessionScope.loginUser.role == 'admin'}">
+            <div class="col-md-4">
+                <a href="${pageContext.request.contextPath}/admin/user" class="text-decoration-none">
+                    <div class="glass-card stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);"><i class="bi bi-people-fill"></i></div>
+                        <div class="stat-info">
+                            <h3>用户管理</h3>
+                            <p>管理系统用户</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            </c:if>
+            <div class="col-md-4">
+                <a href="${pageContext.request.contextPath}/admin/chat" class="text-decoration-none">
+                    <div class="glass-card stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);"><i class="bi bi-chat-dots"></i></div>
+                        <div class="stat-info">
+                            <h3>私信管理</h3>
+                            <p>查看私信消息</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <div class="glass-card">
@@ -93,9 +124,17 @@
                 <a href="${pageContext.request.contextPath}/admin/photo?action=upload" class="btn btn-outline-light">
                     <i class="bi bi-upload"></i> 上传照片
                 </a>
-                <a href="${pageContext.request.contextPath}/admin/friend?action=add" class="btn btn-outline-light">
+                <a href="${pageContext.request.contextPath}/admin/friend?action=search" class="btn btn-outline-light">
+                    <i class="bi bi-person-plus"></i> 添加好友
+                </a>
+                <c:if test="${sessionScope.loginUser.role == 'admin'}">
+                <a href="${pageContext.request.contextPath}/admin/friendLink?action=add" class="btn btn-outline-light">
                     <i class="bi bi-link-45deg"></i> 添加友链
                 </a>
+                <a href="${pageContext.request.contextPath}/admin/user?action=add" class="btn btn-outline-light">
+                    <i class="bi bi-person-plus-fill"></i> 新增用户
+                </a>
+                </c:if>
             </div>
         </div>
     </main>

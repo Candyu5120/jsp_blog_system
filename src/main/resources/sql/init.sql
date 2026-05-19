@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS jsp_blog DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE jsp_blog;
 
--- 博主账号表
+-- 用户账号表
 CREATE TABLE IF NOT EXISTS t_user (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS t_user (
     avatar VARCHAR(255) DEFAULT NULL,
     email VARCHAR(100) DEFAULT NULL,
     bio TEXT DEFAULT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'editor' COMMENT 'admin=管理员, editor=编辑',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,8 +99,8 @@ CREATE TABLE IF NOT EXISTS t_oidc_setting (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 默认管理员账号 (密码: admin123 的 SHA-256 哈希)
-INSERT INTO t_user (username, password, nickname, email, bio)
-VALUES ('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', '博主', 'admin@blog.com', '这是一个热爱技术的博主');
+INSERT INTO t_user (username, password, nickname, email, bio, role)
+VALUES ('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', '博主', 'admin@blog.com', '这是一个热爱技术的博主', 'admin');
 
 -- 默认分类
 INSERT INTO t_category (name, description, sort_order) VALUES
@@ -111,3 +112,27 @@ INSERT INTO t_category (name, description, sort_order) VALUES
 INSERT INTO t_article (title, content, summary, category_id, author_id, status) VALUES
 ('欢迎来到我的博客', '<p>这是我的第一篇博客文章，欢迎访问！</p><p>在这里，我将分享我的技术学习笔记、项目经验和生活感悟。</p>', '这是我的第一篇博客文章，欢迎访问！', 1, 1, 1),
 ('JSP 入门指南', '<p>JSP（JavaServer Pages）是一种基于 Java 的服务器端技术，用于创建动态网页。</p><p>本文将介绍 JSP 的基本概念和使用方法。</p>', 'JSP 基本概念和使用方法介绍', 1, 1, 1);
+
+-- 好友关系表
+CREATE TABLE IF NOT EXISTS t_user_friend (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    friend_id INT NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'pending' COMMENT 'pending=待接受, accepted=已接受',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_user_friend (user_id, friend_id),
+    FOREIGN KEY (user_id) REFERENCES t_user(id) ON DELETE CASCADE,
+    FOREIGN KEY (friend_id) REFERENCES t_user(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 私信表
+CREATE TABLE IF NOT EXISTS t_chat_message (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    content TEXT NOT NULL,
+    is_read TINYINT DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES t_user(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES t_user(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

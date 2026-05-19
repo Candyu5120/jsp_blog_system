@@ -26,8 +26,15 @@
             <li><a href="${pageContext.request.contextPath}/admin/comment" class="active"><i class="bi bi-chat"></i> 评论管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/message"><i class="bi bi-envelope"></i> 留言管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/photo"><i class="bi bi-images"></i> 相册管理</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/friend"><i class="bi bi-link-45deg"></i> 友链管理</a></li>
+            <li class="nav-divider"></li>
+            <li><a href="${pageContext.request.contextPath}/admin/friend"><i class="bi bi-people"></i> 好友管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/chat"><i class="bi bi-chat-dots"></i> 私信管理</a></li>
+            <c:if test="${sessionScope.loginUser.role == 'admin'}">
+            <li class="nav-divider"></li>
+            <li><a href="${pageContext.request.contextPath}/admin/friendLink"><i class="bi bi-link-45deg"></i> 友链管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/user"><i class="bi bi-people-fill"></i> 用户管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/oidc/setting"><i class="bi bi-shield-lock"></i> OIDC 设置</a></li>
+            </c:if>
         </ul>
         <div class="sidebar-footer"><a href="${pageContext.request.contextPath}/admin/logout"><i class="bi bi-box-arrow-left"></i> 退出</a></div>
     </nav>

@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(python -c ' *)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(cmd.exe /c \"where mvn\")",
+      "Bash(cmd.exe /c \"mvn -version\")",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/Candyu/.m2/**)",
+      "Bash(ls \"c:/Program Files/JetBrains/\"*/plugins/maven/lib/maven3/bin/mvn 2>/dev/null; ls \"c:/Users/Candyu/AppData/Local/JetBrains/\"*/plugins/maven/lib/maven3/bin/mvn 2>/dev/null; ls \"c:/Program Files/JetBrains/\"* 2>/dev/null)",
+      "Read(//c/Users/Candyu/AppData/Local/JetBrains/**)",
+      "Bash(\"c:/Program Files/JetBrains/IntelliJ IDEA 2026.1/plugins/maven/lib/maven3/bin/mvn\" compile -q)"
     ]
   }
 }

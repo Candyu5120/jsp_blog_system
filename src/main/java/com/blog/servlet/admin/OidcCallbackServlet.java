@@ -112,6 +112,7 @@ public class OidcCallbackServlet extends HttpServlet {
                 user.setNickname(name != null ? name : username);
                 user.setEmail(email);
                 user.setBio("OIDC user");
+                user.setRole("editor");
                 int userId = userDao.insert(user);
                 user.setId(userId);
             }

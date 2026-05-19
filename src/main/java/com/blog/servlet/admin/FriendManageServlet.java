@@ -20,16 +20,16 @@ public class FriendManageServlet extends HttpServlet {
         try {
             switch (action) {
                 case "add":
-                    req.getRequestDispatcher("/admin/friendEdit.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/admin/friendLinkEdit.jsp").forward(req, resp);
                     break;
                 case "edit":
                     int editId = Integer.parseInt(req.getParameter("id"));
                     req.setAttribute("friend", friendDao.findById(editId));
-                    req.getRequestDispatcher("/admin/friendEdit.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/admin/friendLinkEdit.jsp").forward(req, resp);
                     break;
                 default:
                     req.setAttribute("friends", friendDao.findAll());
-                    req.getRequestDispatcher("/admin/friendList.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/admin/friendLinkList.jsp").forward(req, resp);
             }
         } catch (Exception e) {
             throw new ServletException(e);
@@ -64,7 +64,7 @@ public class FriendManageServlet extends HttpServlet {
                     friendDao.delete(Integer.parseInt(req.getParameter("id")));
                     break;
             }
-            resp.sendRedirect(req.getContextPath() + "/admin/friend");
+            resp.sendRedirect(req.getContextPath() + "/admin/friendLink");
         } catch (Exception e) {
             throw new ServletException(e);
         }

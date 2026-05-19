@@ -181,7 +181,34 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>FriendManageServlet</servlet-name>
+        <url-pattern>/admin/friendLink</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.UserManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserManageServlet</servlet-name>
+        <url-pattern>/admin/user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FriendshipManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.FriendshipManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FriendshipManageServlet</servlet-name>
         <url-pattern>/admin/friend</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChatServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.ChatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChatServlet</servlet-name>
+        <url-pattern>/admin/chat</url-pattern>
     </servlet-mapping>
 
     <!-- ==================== MIME Types ==================== -->
