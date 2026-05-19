@@ -14,7 +14,16 @@ public class CharacterEncodingFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        
+        if (request instanceof jakarta.servlet.http.HttpServletRequest) {
+            String path = ((jakarta.servlet.http.HttpServletRequest) request).getRequestURI();
+            if (!path.matches(".*\\.(css|js|woff|woff2|ttf|png|jpg|jpeg|gif|ico|svg)$")) {
+                response.setCharacterEncoding("UTF-8");
+            }
+        } else {
+            response.setCharacterEncoding("UTF-8");
+        }
+        
         chain.doFilter(request, response);
     }
 
