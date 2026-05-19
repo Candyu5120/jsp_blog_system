@@ -1,6 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0">
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>Personal Blog System</display-name>
+
+    <!-- ==================== Filters ==================== -->
+    <filter>
+        <filter-name>AdminAuthFilter</filter-name>
+        <filter-class>com.blog.filter.AdminAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <!-- ==================== Front-end Servlets ==================== -->
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.IndexServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ArticleDetailServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.ArticleDetailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArticleDetailServlet</servlet-name>
+        <url-pattern>/article</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ArticleSearchServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.ArticleSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArticleSearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MessageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.MessageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageServlet</servlet-name>
+        <url-pattern>/message</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PhotoAlbumServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.PhotoAlbumServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PhotoAlbumServlet</servlet-name>
+        <url-pattern>/album</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FriendLinkServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.FriendLinkServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FriendLinkServlet</servlet-name>
+        <url-pattern>/friends</url-pattern>
+    </servlet-mapping>
+
+    <!-- ==================== Admin Servlets ==================== -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/admin/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OidcLoginServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.OidcLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OidcLoginServlet</servlet-name>
+        <url-pattern>/admin/oidc/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OidcCallbackServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.OidcCallbackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OidcCallbackServlet</servlet-name>
+        <url-pattern>/admin/oidc/callback</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OidcSettingManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.OidcSettingManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OidcSettingManageServlet</servlet-name>
+        <url-pattern>/admin/oidc/setting</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ArticleManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.ArticleManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArticleManageServlet</servlet-name>
+        <url-pattern>/admin/article</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CategoryManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.CategoryManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryManageServlet</servlet-name>
+        <url-pattern>/admin/category</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CommentManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.CommentManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommentManageServlet</servlet-name>
+        <url-pattern>/admin/comment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MessageManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.MessageManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageManageServlet</servlet-name>
+        <url-pattern>/admin/message</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PhotoManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.PhotoManageServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size>
+            <max-request-size>10485760</max-request-size>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PhotoManageServlet</servlet-name>
+        <url-pattern>/admin/photo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FriendManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.FriendManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FriendManageServlet</servlet-name>
+        <url-pattern>/admin/friend</url-pattern>
+    </servlet-mapping>
+
+    <!-- ==================== MIME Types ==================== -->
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>js</extension>
+        <mime-type>application/javascript</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>font/woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff2</extension>
+        <mime-type>font/woff2</mime-type>
+    </mime-mapping>
+
+    <!-- ==================== Welcome File ==================== -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- ==================== Error Pages ==================== -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500.jsp</location>
+    </error-page>
+
 </web-app>

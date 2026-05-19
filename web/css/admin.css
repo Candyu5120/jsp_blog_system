@@ -1,0 +1,421 @@
+/* ============================================
+   Admin Panel - Glassmorphism Dark Style
+   ============================================ */
+
+/* Admin Login Background */
+.admin-login-bg {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #3b0a45, transparent 40%),
+                radial-gradient(circle at bottom right, #09194f, transparent 40%),
+                radial-gradient(circle at center, #1b1136, #0a0815 100%);
+    background-color: #0a0815;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-login-bg::before,
+.admin-login-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: 0;
+    animation: floatOrb 20s infinite alternate ease-in-out;
+}
+
+.admin-login-bg::before {
+    width: 400px;
+    height: 400px;
+    background: rgba(118, 75, 162, 0.35);
+    top: -100px;
+    left: -100px;
+}
+
+.admin-login-bg::after {
+    width: 500px;
+    height: 500px;
+    background: rgba(102, 126, 234, 0.25);
+    bottom: -150px;
+    right: -100px;
+    animation-delay: -10s;
+}
+
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(120px, 80px) scale(1.2); }
+}
+
+.login-container {
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.login-card {
+    padding: 48px 40px;
+    text-align: center;
+}
+
+.login-logo {
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    display: inline-block;
+    filter: drop-shadow(0 4px 10px rgba(161, 140, 209, 0.3));
+}
+
+.login-card h3 {
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+.divider-text {
+    position: relative;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 38%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.divider-text::before { left: 0; }
+.divider-text::after { right: 0; }
+
+/* Glass Dark Card */
+.glass-card-dark {
+    background: rgba(20, 20, 35, 0.45);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-card-dark:hover {
+    transform: translateY(-5px);
+}
+
+/* Custom Login Inputs */
+.login-card .form-label {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: block;
+    text-align: left;
+}
+
+.login-card .input-group {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.login-card .input-group:focus-within {
+    border-color: rgba(161, 140, 209, 0.5);
+    box-shadow: 0 0 0 3px rgba(161, 140, 209, 0.2), inset 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.login-card .input-group > .glass-input,
+.login-card .input-group > .glass-input-addon {
+    border: none !important;
+    background: transparent !important;
+    color: #ffffff !important;
+}
+
+.login-card .glass-input-addon {
+    color: rgba(255, 255, 255, 0.5) !important;
+    padding-left: 16px;
+    padding-right: 12px;
+}
+
+.login-card .input-group:focus-within > .glass-input-addon {
+    color: #a18cd1 !important;
+}
+
+.login-card .glass-input {
+    padding-left: 8px;
+    height: 48px;
+}
+
+.login-card .glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Login Button */
+.login-card .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(118, 75, 162, 0.4);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.login-card .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: all 0.6s ease;
+}
+
+.login-card .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(118, 75, 162, 0.6);
+}
+
+.login-card .btn-primary:hover::before {
+    left: 150%;
+}
+
+/* OIDC Button */
+.login-card .btn-outline-light {
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    color: rgba(255,255,255,0.9);
+}
+
+.login-card .btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* Admin Background */
+.admin-bg {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #e2e8f0;
+}
+
+/* Admin Layout */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 250px;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.glass-sidebar {
+    background: rgba(15, 12, 41, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-header {
+    padding: 24px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 12px 0;
+    margin: 0;
+    flex: 1;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a.active {
+    color: #fff;
+    background: rgba(102, 126, 234, 0.2);
+    border-right: 3px solid #667eea;
+}
+
+.sidebar-nav li a i {
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+.sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-footer a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+}
+
+.sidebar-footer a:hover {
+    color: #fff;
+}
+
+/* Admin Content */
+.admin-content {
+    margin-left: 250px;
+    flex: 1;
+    padding: 24px 32px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.content-header h4 {
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Stat Cards */
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+}
+
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.stat-info h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.stat-info p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+}
+
+/* Table overrides for dark theme */
+.table-dark {
+    --bs-table-bg: transparent;
+    --bs-table-hover-bg: rgba(102, 126, 234, 0.1);
+    --bs-table-border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Photo card inner */
+.photo-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Glass input for admin */
+.admin-content .glass-input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #e2e8f0 !important;
+    border-radius: 10px !important;
+}
+
+.admin-content .glass-input:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+}
+
+.admin-content .form-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.admin-content .form-check-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .admin-sidebar {
+        width: 200px;
+    }
+    .admin-content {
+        margin-left: 200px;
+        padding: 16px;
+    }
+}
