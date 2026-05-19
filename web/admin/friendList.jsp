@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/admin.css?v=3" rel="stylesheet" type="text/css">
 </head>
 <body class="admin-bg">
 <div class="admin-wrapper">
@@ -44,20 +44,20 @@
             <h4><i class="bi bi-people"></i> 好友管理</h4>
         </div>
 
-        <ul class="nav nav-tabs mb-4" style="border-color: rgba(255,255,255,0.1)">
+        <ul class="nav nav-tabs mb-4" style="border-color: rgba(212,134,156,0.15)">
             <li class="nav-item">
-                <a class="nav-link ${activeTab == 'friends' ? 'active' : ''}" href="${pageContext.request.contextPath}/admin/friend" style="color: ${activeTab == 'friends' ? '#fff' : 'rgba(255,255,255,0.5)'}; background: ${activeTab == 'friends' ? 'rgba(255,255,255,0.05)' : 'transparent'}; border-color: ${activeTab == 'friends' ? 'rgba(255,255,255,0.1)' : 'transparent'}">
+                <a class="nav-link ${activeTab == 'friends' ? 'active' : ''}" href="${pageContext.request.contextPath}/admin/friend" style="color: ${activeTab == 'friends' ? '#d4869c' : 'rgba(55,71,79,0.5)'}; background: ${activeTab == 'friends' ? 'rgba(212,134,156,0.06)' : 'transparent'}; border-color: ${activeTab == 'friends' ? 'rgba(212,134,156,0.2)' : 'transparent'}">
                     <i class="bi bi-people"></i> 我的好友
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ${activeTab == 'requests' ? 'active' : ''}" href="${pageContext.request.contextPath}/admin/friend?action=requests" style="color: ${activeTab == 'requests' ? '#fff' : 'rgba(255,255,255,0.5)'}; background: ${activeTab == 'requests' ? 'rgba(255,255,255,0.05)' : 'transparent'}; border-color: ${activeTab == 'requests' ? 'rgba(255,255,255,0.1)' : 'transparent'}">
+                <a class="nav-link ${activeTab == 'requests' ? 'active' : ''}" href="${pageContext.request.contextPath}/admin/friend?action=requests" style="color: ${activeTab == 'requests' ? '#d4869c' : 'rgba(55,71,79,0.5)'}; background: ${activeTab == 'requests' ? 'rgba(212,134,156,0.06)' : 'transparent'}; border-color: ${activeTab == 'requests' ? 'rgba(212,134,156,0.2)' : 'transparent'}">
                     <i class="bi bi-person-plus"></i> 好友请求
                     <c:if test="${not empty requests}"><span class="badge bg-danger ms-1">${requests.size()}</span></c:if>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ${activeTab == 'search' ? 'active' : ''}" href="${pageContext.request.contextPath}/admin/friend?action=search" style="color: ${activeTab == 'search' ? '#fff' : 'rgba(255,255,255,0.5)'}; background: ${activeTab == 'search' ? 'rgba(255,255,255,0.05)' : 'transparent'}; border-color: ${activeTab == 'search' ? 'rgba(255,255,255,0.1)' : 'transparent'}">
+                <a class="nav-link ${activeTab == 'search' ? 'active' : ''}" href="${pageContext.request.contextPath}/admin/friend?action=search" style="color: ${activeTab == 'search' ? '#d4869c' : 'rgba(55,71,79,0.5)'}; background: ${activeTab == 'search' ? 'rgba(212,134,156,0.06)' : 'transparent'}; border-color: ${activeTab == 'search' ? 'rgba(212,134,156,0.2)' : 'transparent'}">
                     <i class="bi bi-search"></i> 添加好友
                 </a>
             </li>
@@ -140,10 +140,10 @@
 
         <c:if test="${activeTab == 'search'}">
             <div class="glass-card mb-4">
-                <form action="${pageContext.request.contextPath}/admin/friend" method="get" class="d-flex gap-3">
+                <form action="${pageContext.request.contextPath}/admin/friend" method="get" class="d-flex gap-3 align-items-center">
                     <input type="hidden" name="action" value="search">
-                    <input type="text" name="keyword" class="form-control glass-input" placeholder="输入用户名搜索..." value="${keyword}" style="height:42px">
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i> 搜索</button>
+                    <input type="text" name="keyword" class="form-control glass-input" placeholder="输入用户名搜索..." value="${keyword}">
+                    <button type="submit" class="btn btn-primary flex-shrink-0"><i class="bi bi-search"></i> 搜索</button>
                 </form>
             </div>
             <c:if test="${not empty searchResults}">

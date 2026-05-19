@@ -13,9 +13,9 @@
                         <div class="col-md-6">
                             <a href="${f.url}" target="_blank" rel="noopener" class="text-decoration-none">
                                 <div class="glass-card-inner p-3 d-flex align-items-center gap-3">
-                                    <i class="bi bi-globe fs-3" style="color:#667eea"></i>
+                                    <i class="bi bi-globe fs-3" style="color:#d4869c"></i>
                                     <div>
-                                        <strong style="color:#2d3748">${f.name}</strong>
+                                        <strong style="color:#4a4a5a">${f.name}</strong>
                                         <c:if test="${not empty f.description}"><br><small class="text-muted">${f.description}</small></c:if>
                                     </div>
                                 </div>

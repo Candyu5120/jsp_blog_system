@@ -13,7 +13,7 @@
     
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/admin.css?v=3" rel="stylesheet" type="text/css">
 </head>
 <body class="admin-bg">
 <div class="admin-wrapper">
@@ -90,7 +90,7 @@
             <div class="col-md-4">
                 <a href="${pageContext.request.contextPath}/admin/user" class="text-decoration-none">
                     <div class="glass-card stat-card">
-                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);"><i class="bi bi-people-fill"></i></div>
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #d4869c, #e8a0b4);"><i class="bi bi-people-fill"></i></div>
                         <div class="stat-info">
                             <h3>用户管理</h3>
                             <p>管理系统用户</p>
@@ -102,7 +102,7 @@
             <div class="col-md-4">
                 <a href="${pageContext.request.contextPath}/admin/chat" class="text-decoration-none">
                     <div class="glass-card stat-card">
-                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);"><i class="bi bi-chat-dots"></i></div>
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #d4869c, #e8a0b4);"><i class="bi bi-chat-dots"></i></div>
                         <div class="stat-info">
                             <h3>私信管理</h3>
                             <p>查看私信消息</p>

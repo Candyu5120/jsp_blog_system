@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/admin.css?v=3" rel="stylesheet" type="text/css">
 </head>
 <body class="admin-bg">
 <div class="admin-wrapper">
@@ -60,16 +60,16 @@
                         <c:set var="otherId" value="${conv.senderId == sessionScope.loginUser.id ? conv.receiverId : conv.senderId}" />
                         <c:set var="otherName" value="${conv.senderId == sessionScope.loginUser.id ? conv.receiverNickname : conv.senderNickname}" />
                         <a href="${pageContext.request.contextPath}/admin/chat?action=conversation&userId=${otherId}" class="text-decoration-none">
-                            <div class="d-flex align-items-center gap-3 py-3 px-2" style="border-bottom: 1px solid rgba(255,255,255,0.05)">
+                            <div class="d-flex align-items-center gap-3 py-3 px-2" style="border-bottom: 1px solid rgba(212,134,156,0.06)">
                                 <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;font-size:1.2rem;color:#fff">
                                     ${otherName.substring(0,1)}
                                 </div>
                                 <div class="flex-grow-1 overflow-hidden">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="fw-bold text-white">${otherName}</span>
+                                        <span class="fw-bold" style="color:#4a4a5a">${otherName}</span>
                                         <small class="text-muted"><fmt:formatDate value="${conv.createdAt}" pattern="MM-dd HH:mm"/></small>
                                     </div>
-                                    <div class="text-truncate" style="color: rgba(255,255,255,0.5)">
+                                    <div class="text-truncate" style="color: rgba(74,74,90,0.45)">
                                         <c:if test="${conv.senderId == sessionScope.loginUser.id}">我: </c:if>${conv.content}
                                     </div>
                                 </div>

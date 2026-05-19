@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/admin.css?v=3" rel="stylesheet" type="text/css">
     <style>
         .chat-container { display: flex; flex-direction: column; height: calc(100vh - 140px); }
         .chat-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column-reverse; }
@@ -19,11 +19,11 @@
         .chat-message.sent { justify-content: flex-end; }
         .chat-message.received { justify-content: flex-start; }
         .chat-bubble { max-width: 60%; padding: 10px 16px; border-radius: 18px; font-size: 0.9rem; line-height: 1.5; word-break: break-word; }
-        .chat-message.sent .chat-bubble { background: linear-gradient(135deg, #e53e3e, #dd6b20); color: #fff; border-bottom-right-radius: 4px; }
-        .chat-message.received .chat-bubble { background: rgba(255,255,255,0.08); color: #e2e8f0; border-bottom-left-radius: 4px; }
-        .chat-time { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 4px; }
+        .chat-message.sent .chat-bubble { background: linear-gradient(135deg, #d4869c, #e8a0b4); color: #fff; border-bottom-right-radius: 4px; }
+        .chat-message.received .chat-bubble { background: rgba(212,134,156,0.06); color: #4a4a5a; border-bottom-left-radius: 4px; }
+        .chat-time { font-size: 0.7rem; color: rgba(74,74,90,0.35); margin-top: 4px; }
         .chat-message.sent .chat-time { text-align: right; }
-        .chat-input-area { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .chat-input-area { padding: 16px 20px; border-top: 1px solid rgba(212,134,156,0.1); }
         .chat-input-area form { display: flex; gap: 12px; }
         .chat-input-area textarea { resize: none; height: 42px; }
     </style>
@@ -57,7 +57,7 @@
     <main class="admin-content">
         <div class="content-header">
             <h4>
-                <a href="${pageContext.request.contextPath}/admin/chat" class="text-white me-2"><i class="bi bi-arrow-left"></i></a>
+                <a href="${pageContext.request.contextPath}/admin/chat" class="me-2" style="color:#d4869c"><i class="bi bi-arrow-left"></i></a>
                 <i class="bi bi-chat-dots"></i> ${otherUser.nickname}
                 <small class="text-muted">@${otherUser.username}</small>
             </h4>
