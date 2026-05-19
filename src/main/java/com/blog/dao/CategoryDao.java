@@ -8,15 +8,18 @@ import java.util.List;
 public class CategoryDao extends BaseDao {
 
     public List<Category> findAll() throws SQLException {
-        String sql = "SELECT * FROM t_category ORDER BY sort_order ASC, id ASC";
+        String sql = "SELECT c.*, " +
+                "(SELECT COUNT(*) FROM t_article a WHERE a.category_id = c.id AND a.status = 1) AS article_count " +
+                "FROM t_category c ORDER BY c.sort_order ASC, c.id ASC";
         return executeQueryList(sql, rs -> {
-            Category c = new Category();
-            c.setId(rs.getInt("id"));
-            c.setName(rs.getString("name"));
-            c.setDescription(rs.getString("description"));
-            c.setSortOrder(rs.getInt("sort_order"));
-            c.setCreatedAt(rs.getTimestamp("created_at"));
-            return c;
+            Category cat = new Category();
+            cat.setId(rs.getInt("id"));
+            cat.setName(rs.getString("name"));
+            cat.setDescription(rs.getString("description"));
+            cat.setSortOrder(rs.getInt("sort_order"));
+            cat.setCreatedAt(rs.getTimestamp("created_at"));
+            cat.setArticleCount(rs.getInt("article_count"));
+            return cat;
         });
     }
 

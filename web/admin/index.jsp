@@ -13,7 +13,7 @@
     
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/css/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/css/admin.css?v=3" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet" type="text/css">
 </head>
 <body class="admin-bg">
 <div class="admin-wrapper">
@@ -39,11 +39,26 @@
             <li><a href="${pageContext.request.contextPath}/admin/oidc/setting"><i class="bi bi-shield-lock"></i> OIDC 设置</a></li>
             </c:if>
         </ul>
+
         <div class="sidebar-footer">
-            <a href="${pageContext.request.contextPath}/admin/settings"><i class="bi bi-gear"></i> 个人设置</a>
-            <a href="${pageContext.request.contextPath}/admin/logout"><i class="bi bi-box-arrow-left"></i> 退出登录</a>
-            <a href="${pageContext.request.contextPath}/index" target="_blank"><i class="bi bi-eye"></i> 查看博客</a>
+            <div class="dropdown dropup">
+                <button class="sidebar-user-btn dropdown-toggle" data-bs-toggle="dropdown">
+                    <div class="sidebar-user-avatar">${sessionScope.loginUser.nickname.substring(0,1)}</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name">${sessionScope.loginUser.nickname}</div>
+                        <div class="sidebar-user-username">@${sessionScope.loginUser.username}</div>
+                    </div>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/settings"><i class="bi bi-gear"></i> 个人设置</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/index"><i class="bi bi-house"></i> 返回首页</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/admin/logout"><i class="bi bi-box-arrow-left"></i> 退出登录</a></li>
+                </ul>
+            </div>
         </div>
+
+
     </nav>
 
     <!-- Main Content -->
@@ -140,7 +155,7 @@
         </div>
     </main>
 </div>
-<script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js?v=1779187447"></script>
-<script src="${pageContext.request.contextPath}/js/admin.js?v=1779187447"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/admin.js"></script>
 </body>
 </html>

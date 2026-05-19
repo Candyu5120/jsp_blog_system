@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%-- Redirect to IndexServlet if accessed directly (e.g. via welcome-file) without data --%>
+<c:if test="${empty articles}">
+    <c:redirect url="/index"/>
+</c:if>
 <jsp:include page="/common/header.jsp"><jsp:param name="title" value="首页"/></jsp:include>
 <jsp:include page="/common/nav.jsp"><jsp:param name="active" value="home"/></jsp:include>
 
