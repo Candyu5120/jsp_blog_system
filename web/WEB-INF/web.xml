@@ -80,6 +80,15 @@
         <url-pattern>/friends</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MusicApiServlet</servlet-name>
+        <servlet-class>com.blog.servlet.front.MusicApiServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MusicApiServlet</servlet-name>
+        <url-pattern>/api/music</url-pattern>
+    </servlet-mapping>
+
     <!-- ==================== Admin Servlets ==================== -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -218,6 +227,15 @@
     <servlet-mapping>
         <servlet-name>SettingsServlet</servlet-name>
         <url-pattern>/admin/settings</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MusicManageServlet</servlet-name>
+        <servlet-class>com.blog.servlet.admin.MusicManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MusicManageServlet</servlet-name>
+        <url-pattern>/admin/music</url-pattern>
     </servlet-mapping>
 
     <!-- ==================== MIME Types ==================== -->

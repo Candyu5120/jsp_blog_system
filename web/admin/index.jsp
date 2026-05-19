@@ -29,6 +29,7 @@
             <li><a href="${pageContext.request.contextPath}/admin/comment"><i class="bi bi-chat"></i> 评论管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/message"><i class="bi bi-envelope"></i> 留言管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/photo"><i class="bi bi-images"></i> 相册管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/music"><i class="bi bi-music-note-beamed"></i> 音乐管理</a></li>
             <li class="nav-divider"></li>
             <li><a href="${pageContext.request.contextPath}/admin/friend"><i class="bi bi-people"></i> 好友管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/chat"><i class="bi bi-chat-dots"></i> 私信管理</a></li>
@@ -126,6 +127,17 @@
                     </div>
                 </a>
             </div>
+            <div class="col-md-4">
+                <a href="${pageContext.request.contextPath}/admin/music" class="text-decoration-none">
+                    <div class="glass-card stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #d4869c, #e8a0b4);"><i class="bi bi-music-note-beamed"></i></div>
+                        <div class="stat-info">
+                            <h3>音乐管理</h3>
+                            <p>管理背景音乐</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <div class="glass-card">
@@ -139,6 +151,9 @@
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/photo?action=upload" class="btn btn-outline-light">
                     <i class="bi bi-upload"></i> 上传照片
+                </a>
+                <a href="${pageContext.request.contextPath}/admin/music?action=add" class="btn btn-outline-light">
+                    <i class="bi bi-music-note-beamed"></i> 添加音乐
                 </a>
                 <a href="${pageContext.request.contextPath}/admin/friend?action=search" class="btn btn-outline-light">
                     <i class="bi bi-person-plus"></i> 添加好友

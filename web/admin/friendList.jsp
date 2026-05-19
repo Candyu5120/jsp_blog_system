@@ -24,6 +24,7 @@
             <li><a href="${pageContext.request.contextPath}/admin/comment"><i class="bi bi-chat"></i> 评论管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/message"><i class="bi bi-envelope"></i> 留言管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/photo"><i class="bi bi-images"></i> 相册管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/music"><i class="bi bi-music-note-beamed"></i> 音乐管理</a></li>
             <li class="nav-divider"></li>
             <li><a href="${pageContext.request.contextPath}/admin/friend" class="active"><i class="bi bi-people"></i> 好友管理</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/chat"><i class="bi bi-chat-dots"></i> 私信管理</a></li>
